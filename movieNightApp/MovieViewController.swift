@@ -11,12 +11,12 @@ import os.log
 
 class MovieViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
-    //label
-    @IBOutlet weak var makeChanges: UILabel!
-    //image
-    @IBOutlet weak var makeAnew: UIImageView!
+    //Title label
+    @IBOutlet weak var movieTitleLabel: UILabel!
+    //Image
+    @IBOutlet weak var posterDisplay: UIImageView!
     //text field
-    @IBOutlet weak var makeAnother: UITextField!
+    @IBOutlet weak var makeAnother: UILabel!
     //image view
     
     //ui label: meta
@@ -40,6 +40,7 @@ class MovieViewController: UIViewController, UIImagePickerControllerDelegate, UI
     @IBOutlet weak var isaiahRating: UISegmentedControl!
     
     @IBOutlet weak var navSave: UIBarButtonItem!
+    
     var movie:Movie?
     
     
@@ -57,7 +58,7 @@ class MovieViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     @IBAction func MakeTitleAct(_ sender: UIButton) {
         
-        makeChanges.text = MakeTitle.text
+        movieTitleLabel.text = MakeTitle.text
         
     }
     
@@ -65,15 +66,15 @@ class MovieViewController: UIViewController, UIImagePickerControllerDelegate, UI
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        if let movie = movie{
+        if let movie = self.movie{
                         
-            makeChanges.text = movie.title
-            makeAnew.image = movie.poster
+            movieTitleLabel.text = movie.title
+            posterDisplay.image = movie.getPoster()
             MakeTitle.text = movie.title
-            makeAnother.text = movie.castCrew
-            metaNum.text = String(movie.metaMovie)
-            metaInput.text = String(movie.metaMovie)
-            isaiahRating.selectedSegmentIndex = movie.rate
+            makeAnother.text = movie.synopsis
+            metaNum.text = String(movie.metaRating)
+            metaInput.text = String(movie.metaRating)
+            isaiahRating.selectedSegmentIndex = movie.isaiahRating
             
         }
         
@@ -144,7 +145,7 @@ class MovieViewController: UIViewController, UIImagePickerControllerDelegate, UI
             fatalError("Expected an image, received: \(info) ")
         }
         
-       makeAnew.image = selectedImage
+        posterDisplay.image = selectedImage
         dismiss(animated: true, completion: nil)
     }
     
@@ -164,14 +165,11 @@ class MovieViewController: UIViewController, UIImagePickerControllerDelegate, UI
             return
         }
         
-        //Create new movie -- whats the code for this?
-        
-        var myTitle = MakeTitle.text!;
-        var poster = makeAnew.image!;
-        var castCrew = makeAnother.text!;
-        var metaMovie = Int(metaInput.text!)!;
-        var rate = isaiahRating.selectedSegmentIndex
-        movie = Movie(title: myTitle,poster: poster,castCrew: castCrew,metaMovie: metaMovie, rate: rate)
+//        var myTitle = MakeTitle.text!;
+//        var poster = posterDisplay.image!;
+//        var metaMovie = Int(metaInput.text!)!;
+//        var rate = isaiahRating.selectedSegmentIndex
+//        self.movie = Movie(title: myTitle, metaRating: metaMovie, isaiahRating: rate)
         
     }
     
@@ -179,23 +177,20 @@ class MovieViewController: UIViewController, UIImagePickerControllerDelegate, UI
         if (metaInput == textField){
             scrollContainer.setContentOffset(CGPoint(x: 0, y: 120), animated: true)
         }
-        self.makeAnew.isUserInteractionEnabled = false;
+        self.posterDisplay.isUserInteractionEnabled = false;
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         if (metaInput == textField){
             scrollContainer.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
         }
-        self.makeAnew.isUserInteractionEnabled = true;
+        self.posterDisplay.isUserInteractionEnabled = true;
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder();
         return true;
     }
-    
-    
-
 }
 
 

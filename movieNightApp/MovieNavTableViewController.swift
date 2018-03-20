@@ -17,7 +17,6 @@ class MovieNavTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         navigationItem.leftBarButtonItem = editButtonItem
         //change the color of this leftBarButtonItem
         navigationItem.leftBarButtonItem?.tintColor = .white
@@ -59,7 +58,6 @@ class MovieNavTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -72,20 +70,14 @@ class MovieNavTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "MovieTableCell"
-       
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? MovieTableViewCell else{
             fatalError("POPCORN BURNING. YOU ARE KICKED OUT. IT IS THE ORDER OF THE AGENTS")
         }
         
         
         let movie = movies[indexPath.row]
-        
-        
         cell.movieName.text = movie.title
-        cell.moviePoster.image = movie.poster
-
-         //Configure the cell.
-
+        cell.moviePoster.image = movie.getPoster()
         return cell
     }
 
@@ -96,7 +88,7 @@ class MovieNavTableViewController: UITableViewController {
         return true
     }
 
-        // Override to support editing the table view.
+    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
@@ -125,10 +117,8 @@ class MovieNavTableViewController: UITableViewController {
     */
 
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         //Parent update
         super.prepare(for: segue, sender: sender)
         
@@ -162,25 +152,19 @@ class MovieNavTableViewController: UITableViewController {
     
     func loadSampleMovies()  {
         
-        let starForcePoster = UIImage(named: "TheForceAwakensPoster")
+        // Force Awakens
+        let forceMovie: Movie = Movie(title: "The Force Awakens", movieDbId: 0, cast: "Daisy Ridley, John Boyega, Adam Driver, JJ Abrams", metaRating: 81, isaiahRating: 2)!
+        forceMovie.setPosterName(name: "TheForceAwakensPoster")
         
-        var forceMovie: Movie = Movie(title: "The Force Awakens",poster: starForcePoster,castCrew: "Daisy Ridley, John Boyega, Adam Driver, JJ Abrams",metaMovie: 81,rate: 2)!
+        let tapMovie: Movie = Movie(title: "Spinal Tap", movieDbId: 0, cast: "Christopher Guest, Rob Reiner, Michael McKean, Harry Shearer", metaRating: 85, isaiahRating: 2)!
+        tapMovie.setPosterName(name: "TheSpinalTapPoster");
         
-        
-        let rockTapPoster = UIImage(named: "TheSpinalTapPoster")
-        
-        var tapMovie: Movie = Movie(title: "Spinal Tap", poster: rockTapPoster, castCrew: "Christopher Guest, Rob Reiner, Michael McKean, Harry Shearer", metaMovie: 85, rate: 2)!
-        
-        let starRoguePoster = UIImage(named: "TheRogueOnePoster")
-        
-        var rogueMovie: Movie = Movie(title: "Rogue One: A Star Wars Story", poster: starRoguePoster, castCrew: "Felicity Jones, Diego Luna, Ben Mendelsohn, Gareth Edwards", metaMovie: 65, rate: 2)!
-        
-        
+        let rogueMovie: Movie = Movie(title: "Rogue One: A Star Wars Story", movieDbId: 0, cast: "Felicity Jones, Diego Luna, Ben Mendelsohn, Gareth Edwards", metaRating: 65, isaiahRating: 2)!
+        rogueMovie.setPosterName(name: "TheRogueOnePoster");
+    
         movies.append(forceMovie)
         movies.append(tapMovie)
         movies.append(rogueMovie)
-        
-        
     }
     
     //Movie Table View
@@ -196,9 +180,7 @@ class MovieNavTableViewController: UITableViewController {
                 movies.append(movie)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
-
             saveMovies()
-            
         }
     }
 }

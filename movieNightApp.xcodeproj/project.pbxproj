@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A338449205F5EA9006ACBD7 /* AddMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A338448205F5EA9006ACBD7 /* AddMovieViewController.swift */; };
+		0A33844B205F5ED3006ACBD7 /* AutoCompleteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A33844A205F5ED3006ACBD7 /* AutoCompleteTableViewCell.swift */; };
 		743CCD841F216D7800C313F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CCD831F216D7800C313F8 /* AppDelegate.swift */; };
 		743CCD861F216D7800C313F8 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CCD851F216D7800C313F8 /* MovieViewController.swift */; };
 		743CCD891F216D7800C313F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 743CCD871F216D7800C313F8 /* Main.storyboard */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A338448205F5EA9006ACBD7 /* AddMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieViewController.swift; sourceTree = "<group>"; };
+		0A33844A205F5ED3006ACBD7 /* AutoCompleteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompleteTableViewCell.swift; sourceTree = "<group>"; };
 		743CCD801F216D7800C313F8 /* movieNightApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = movieNightApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		743CCD831F216D7800C313F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		743CCD851F216D7800C313F8 /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +69,8 @@
 				743CCD831F216D7800C313F8 /* AppDelegate.swift */,
 				743CCD851F216D7800C313F8 /* MovieViewController.swift */,
 				743CCD871F216D7800C313F8 /* Main.storyboard */,
+				0A33844A205F5ED3006ACBD7 /* AutoCompleteTableViewCell.swift */,
+				0A338448205F5EA9006ACBD7 /* AddMovieViewController.swift */,
 				7464D1351F86F38A000FCE8D /* MovieNavTableViewController.swift */,
 				7464D1311F7DB58F000FCE8D /* movie.swift */,
 				7464D1331F86F232000FCE8D /* MovieTableViewCell.swift */,
@@ -152,9 +158,11 @@
 				7464D1341F86F233000FCE8D /* MovieTableViewCell.swift in Sources */,
 				743CCD861F216D7800C313F8 /* MovieViewController.swift in Sources */,
 				743CCD841F216D7800C313F8 /* AppDelegate.swift in Sources */,
+				0A338449205F5EA9006ACBD7 /* AddMovieViewController.swift in Sources */,
 				7464D1321F7DB58F000FCE8D /* movie.swift in Sources */,
 				743CCD8C1F216D7800C313F8 /* movieNightApp.xcdatamodeld in Sources */,
 				7464D1361F86F38A000FCE8D /* MovieNavTableViewController.swift in Sources */,
+				0A33844B205F5ED3006ACBD7 /* AutoCompleteTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
