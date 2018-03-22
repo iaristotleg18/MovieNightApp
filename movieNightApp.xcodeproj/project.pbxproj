@@ -15,6 +15,7 @@
 		743CCD8C1F216D7800C313F8 /* movieNightApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 743CCD8A1F216D7800C313F8 /* movieNightApp.xcdatamodeld */; };
 		743CCD8E1F216D7800C313F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 743CCD8D1F216D7800C313F8 /* Assets.xcassets */; };
 		743CCD911F216D7800C313F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 743CCD8F1F216D7800C313F8 /* LaunchScreen.storyboard */; };
+		7440C6AE20645D5500B9D5D3 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7440C6AD20645D5500B9D5D3 /* PreviewViewController.swift */; };
 		7464D1321F7DB58F000FCE8D /* movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7464D1311F7DB58F000FCE8D /* movie.swift */; };
 		7464D1341F86F233000FCE8D /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7464D1331F86F232000FCE8D /* MovieTableViewCell.swift */; };
 		7464D1361F86F38A000FCE8D /* MovieNavTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7464D1351F86F38A000FCE8D /* MovieNavTableViewController.swift */; };
@@ -31,6 +32,7 @@
 		743CCD8D1F216D7800C313F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		743CCD901F216D7800C313F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		743CCD921F216D7800C313F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7440C6AD20645D5500B9D5D3 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		7464D1311F7DB58F000FCE8D /* movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = movie.swift; sourceTree = "<group>"; };
 		7464D1331F86F232000FCE8D /* MovieTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		7464D1351F86F38A000FCE8D /* MovieNavTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieNavTableViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				743CCD851F216D7800C313F8 /* MovieViewController.swift */,
 				743CCD871F216D7800C313F8 /* Main.storyboard */,
 				0A33844A205F5ED3006ACBD7 /* AutoCompleteTableViewCell.swift */,
+				7440C6AD20645D5500B9D5D3 /* PreviewViewController.swift */,
 				0A338448205F5EA9006ACBD7 /* AddMovieViewController.swift */,
 				7464D1351F86F38A000FCE8D /* MovieNavTableViewController.swift */,
 				7464D1311F7DB58F000FCE8D /* movie.swift */,
@@ -163,6 +166,7 @@
 				743CCD8C1F216D7800C313F8 /* movieNightApp.xcdatamodeld in Sources */,
 				7464D1361F86F38A000FCE8D /* MovieNavTableViewController.swift in Sources */,
 				0A33844B205F5ED3006ACBD7 /* AutoCompleteTableViewCell.swift in Sources */,
+				7440C6AE20645D5500B9D5D3 /* PreviewViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

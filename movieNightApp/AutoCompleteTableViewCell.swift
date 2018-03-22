@@ -12,6 +12,7 @@ protocol AutoCompleteResultsDelegate {
     func selectedMovie(movie: Movie)
 }
 
+
 class AutoCompleteTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!

@@ -59,13 +59,34 @@ class AddMovieViewController: UIViewController, UITableViewDataSource, UITableVi
     
     /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //Parent update
+        super.prepare(for: segue, sender: sender)
+        
+        switch(segue.identifier ?? "") {
+            
+        case "ShowMovieDetails":
+            
+            guard let previewViewController = segue.destination as? PreviewViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            
+            guard let selectedMovieCell = sender as? AutoCompleteTableViewCell else {
+                fatalError("Unexpected sender: \(sender)")
+            }
+            
+            guard let indexPath = autoCompleteTable.indexPath(for: selectedMovieCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            let selectedMovie = allMoviesResults[indexPath.row]
+            previewViewController.movie = selectedMovie;
+            
+        default:
+            fatalError("Unexpected Segue Identifier; \(segue.identifier)")
+        }
+    }
     
     @IBAction func cancellation(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)

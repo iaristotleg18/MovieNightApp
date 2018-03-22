@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -316,6 +317,7 @@
                                         <connections>
                                             <outlet property="titleLabel" destination="KZq-nX-924" id="SaY-T3-5qK"/>
                                             <outlet property="yearLabel" destination="pHt-3X-JSF" id="rhN-Po-G0z"/>
+                                            <segue destination="Nuy-MT-v5k" kind="presentation" identifier="ShowMovieDetails" id="ZvU-XV-ikU"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -341,7 +343,72 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rEy-0e-0T0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4448.8000000000002" y="-101.19940029985008"/>
+            <point key="canvasLocation" x="4254" y="-101"/>
+        </scene>
+        <!--Preview View Controller-->
+        <scene sceneID="5lU-j5-xrZ">
+            <objects>
+                <viewController id="Nuy-MT-v5k" customClass="PreviewViewController" customModule="movieNightApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aFE-MR-vbB"/>
+                        <viewControllerLayoutGuide type="bottom" id="jF4-Ub-uQg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="G9W-sH-TCc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="krW-KH-LmP">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Rr-Oc-IyN">
+                                        <rect key="frame" x="171" y="0.0" width="33.5" height="111"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JYE-pb-qH5">
+                                        <rect key="frame" x="0.0" y="111" width="375" height="111.5"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Synopsis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7JC-Vd-XNQ">
+                                        <rect key="frame" x="153" y="222.5" width="69.5" height="111"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Metacritic Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b0D-5z-zem">
+                                        <rect key="frame" x="123" y="333.5" width="129.5" height="111"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="11T-GB-F0o">
+                                        <rect key="frame" x="175" y="444.5" width="25" height="111.5"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Skk-hu-Arb">
+                                        <rect key="frame" x="127" y="556" width="121" height="112"/>
+                                        <segments>
+                                            <segment title="First"/>
+                                            <segment title="Second"/>
+                                        </segments>
+                                    </segmentedControl>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottomMargin" secondItem="krW-KH-LmP" secondAttribute="bottom" id="0eE-AG-jdj"/>
+                            <constraint firstItem="krW-KH-LmP" firstAttribute="leading" secondItem="G9W-sH-TCc" secondAttribute="leadingMargin" constant="-16" id="edB-uj-aMG"/>
+                            <constraint firstItem="krW-KH-LmP" firstAttribute="top" secondItem="aFE-MR-vbB" secondAttribute="bottom" constant="-20" id="lRL-IB-zMG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="krW-KH-LmP" secondAttribute="trailing" constant="-16" id="prN-6s-nJm"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ibl-i5-2fW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5111" y="-101"/>
         </scene>
     </scenes>
     <resources>
