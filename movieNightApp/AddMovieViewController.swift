@@ -66,6 +66,8 @@ class AddMovieViewController: UIViewController, UITableViewDataSource, UITableVi
         //Parent update
         super.prepare(for: segue, sender: sender)
         
+        print(segue.identifier);
+        
         switch(segue.identifier ?? "") {
             
         case "ShowMovieDetails":

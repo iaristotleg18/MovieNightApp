@@ -109,23 +109,11 @@ class Movie: NSObject, NSCoding {
         }
     }
     
-    func getPoster() -> UIImage? {
+    func hasImageFile() -> Bool {
         if let path = self.posterPath {
-            return self.getImageData(posterPath: path);
-        } else if self.posterName != ""{
-            if (UIImage(named: self.posterName) != nil) {
-                return UIImage(named: self.posterName);
-            }
+            return FileManager.default.fileExists(atPath: path.path);
         }
-        return nil;
-    }
-    
-    func getImageData(posterPath: URL) -> UIImage? {
-        if FileManager.default.fileExists(atPath: posterPath.path) {
-            return UIImage(contentsOfFile: posterPath.path);
-        } else {
-            return nil;
-        }
+        return false;
     }
     
     func getImagePath(path: String) -> URL {
@@ -150,11 +138,10 @@ class Movie: NSObject, NSCoding {
         self.posterPath = self.getImagePath(path: cleanPosterPath);
     }
     
-    func downloadPoster() {
+    func downloadPoster(view: UIImageView? = nil) {
         guard let posterPath = self.posterPath else {return}
         // If file already exists, just set the poster path to the correct image path
-        if FileManager.default.fileExists(atPath: posterPath.path) {
-            print("file apparently found")
+        if self.hasImageFile() {
             return;
         }
         
@@ -164,17 +151,16 @@ class Movie: NSObject, NSCoding {
         if (self.posterEndpoint.isEmpty) { return }
         var endpoint = "https://image.tmdb.org/t/p/w500/";
         endpoint = endpoint + self.posterEndpoint;
-        guard var url = URLComponents(string: endpoint) else {return}
+        guard var url = URLComponents(string: endpoint) else { return }
         
         url.queryItems = [
             URLQueryItem(name: "api_key", value: "8fe986d35425fe4c2fc5e5b7656225b5")
         ];
         
-        guard let myUrl = url.url else {return}
+        guard let myUrl = url.url else { return }
         let session = URLSession.shared;
         
         session.dataTask(with: myUrl) { (data, res, error) in
-            
             //Make sure you connect to the end point
             guard let data = data, error == nil else {
                 print("dataTask error: \(error?.localizedDescription ?? "Unknown error")")
@@ -187,13 +173,44 @@ class Movie: NSObject, NSCoding {
                 return
             }
             
-            do {
-                try data.write(to: posterPath, options: .atomic)
-                return;
-            } catch let fileError {
-                print(fileError)
+            if let poster = UIImage(data: data) {
+                do {
+                    try data.write(to: posterPath, options: .atomic)
+                } catch let fileError {
+                    print(fileError)
+                }
+                if let imageView = view {
+                    DispatchQueue.main.async() {
+                        imageView.image = poster;
+                    }
+                }
             }
         }.resume();
+    }
+    
+    func getPosterAsync(imageView: UIImageView) {
+        if let path = self.posterPath {
+            if self.hasImageFile(){
+                imageView.image = UIImage(contentsOfFile: path.path);
+            } else {
+                self.downloadPoster(view: imageView);
+            }
+        } else if self.posterName != ""{
+            if (UIImage(named: self.posterName) != nil) {
+                imageView.image = UIImage(named: self.posterName);
+            }
+        }
+    }
+        
+    func getPoster() -> UIImage? {
+        if self.posterPath != nil && self.hasImageFile(){
+            return UIImage(contentsOfFile: posterPath!.path);
+        } else if self.posterName != ""{
+            if (UIImage(named: self.posterName) != nil) {
+                return UIImage(named: self.posterName);
+            }
+        }
+        return nil;
     }
 }
 
