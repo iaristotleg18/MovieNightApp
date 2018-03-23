@@ -462,9 +462,6 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="isaiahRating" destination="e8y-jZ-Exf" id="Jei-KM-xkX"/>
-                        <outlet property="posterView" destination="JYE-pb-qH5" id="Meg-6w-6FM"/>
-                        <outlet property="synopsisTextView" destination="KrB-63-FWM" id="Zyx-c4-eG0"/>
-                        <outlet property="titleLabel" destination="4Rr-Oc-IyN" id="9a1-my-izc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ibl-i5-2fW" userLabel="First Responder" sceneMemberID="firstResponder"/>
