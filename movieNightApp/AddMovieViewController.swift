@@ -48,11 +48,13 @@ class AddMovieViewController: UIViewController, UITableViewDataSource, UITableVi
             fatalError("The dequeued cell is not an instance of AutoCompleteTableViewCell.")
         }
         
-        let movie = allMoviesResults[indexPath.row]
-        cell.titleLabel.text = movie.title;
-        cell.yearLabel.text = "(" + movie.getYear() + ")";
-        cell.delegate = self;
-        cell.data = movie;
+        if (indexPath.row < allMoviesResults.count){
+            let movie = allMoviesResults[indexPath.row]
+            cell.titleLabel.text = movie.title;
+            cell.yearLabel.text = "(" + movie.getYear() + ")";
+            cell.delegate = self;
+            cell.data = movie;
+        }
         
         return cell
     }
