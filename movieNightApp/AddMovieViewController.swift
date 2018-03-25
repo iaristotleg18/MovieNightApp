@@ -66,18 +66,16 @@ class AddMovieViewController: UIViewController, UITableViewDataSource, UITableVi
         //Parent update
         super.prepare(for: segue, sender: sender)
         
-        print(segue.identifier);
-        
         switch(segue.identifier ?? "") {
             
-        case "ShowMovieDetails":
+        case "PreviewMovie":
             
             guard let previewViewController = segue.destination as? PreviewViewController else {
                 fatalError("Unexpected destination: \(segue.destination)")
             }
             
             guard let selectedMovieCell = sender as? AutoCompleteTableViewCell else {
-                fatalError("Unexpected sender: \(sender)")
+                fatalError("Unexpected sender: \(String(describing: sender))")
             }
             
             guard let indexPath = autoCompleteTable.indexPath(for: selectedMovieCell) else {
@@ -87,13 +85,8 @@ class AddMovieViewController: UIViewController, UITableViewDataSource, UITableVi
             let selectedMovie = allMoviesResults[indexPath.row]
             previewViewController.movie = selectedMovie;
             
-        default:
-            fatalError("Unexpected Segue Identifier; \(segue.identifier)")
+        default: break
         }
-    }
-    
-    @IBAction func cancellation(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func searchTextChanged(_ sender: UITextField) {

@@ -124,11 +124,11 @@ class MovieNavTableViewController: UITableViewController {
         
         switch(segue.identifier ?? "") {
             
-        case "AddItem":
+        case "SearchMovie":
             
             os_log("Adding a new film.", log: OSLog.default, type: .debug)
         
-        case "ShowDetail":
+        case "EditDetail":
             
             guard let movieViewController = segue.destination as? MovieViewController else {
                 fatalError("Unexpected destination: \(segue.destination)")
@@ -169,18 +169,27 @@ class MovieNavTableViewController: UITableViewController {
     
     //Movie Table View
     @IBAction func unwindToMovieList(sender: UIStoryboardSegue) {
+        
         if let sourceViewController = sender.source as? MovieViewController, let movie = sourceViewController.movie {
-            
-            if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                movies[selectedIndexPath.row] = movie
-                tableView.reloadRows(at: [selectedIndexPath], with: .none)
-            } else {
-                // Add a new movie
-                let newIndexPath = IndexPath(row: movies.count, section: 0)
-                movies.append(movie)
-                tableView.insertRows(at: [newIndexPath], with: .automatic)
-            }
-            saveMovies()
+            updateMovieList(movie: movie);
         }
+        
+        if let sourceViewController = sender.source as? PreviewViewController, let movie = sourceViewController.movie {
+            updateMovieList(movie: movie);
+        }
+            
+    }
+    
+    func updateMovieList(movie: Movie) {
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            movies[selectedIndexPath.row] = movie
+            tableView.reloadRows(at: [selectedIndexPath], with: .none)
+        } else {
+            // Add a new movie
+            let newIndexPath = IndexPath(row: movies.count, section: 0)
+            movies.append(movie)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        }
+        saveMovies()
     }
 }

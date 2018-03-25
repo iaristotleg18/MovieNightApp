@@ -102,26 +102,26 @@ class MovieViewController: UIViewController, UIImagePickerControllerDelegate, UI
             } else if value >= 25 && value < 50{
                 metaNum.backgroundColor = .orange
                 metaNum.text = metaInput.text
-            }else if value >= 50 && value < 75{
+            } else if value >= 50 && value < 75{
                 metaNum.backgroundColor = .yellow
                 metaNum.text = metaInput.text
-            }else if value >= 0 && value <= 100{
+            } else if value >= 0 && value <= 100{
                 metaNum.backgroundColor = .green
                 metaNum.text = metaInput.text
-            }else{
+            } else{
                 print("You disobeyed our ancient Law of the Forsaken. Your number was too big or too small")
             
             }
-            // prints the value
-            print(value)
-            //meta num text is meta input text
-            
-            }else{
-            //print nil land
-                print("Welcome to NIL-LAND")
-            
-            }
+        // prints the value
+        print(value)
+        //meta num text is meta input text
+        
+        }else{
+        //print nil land
+            print("Welcome to NIL-LAND")
+        
         }
+    }
     
     @IBAction func getPic(_ sender: UITapGestureRecognizer) {
     

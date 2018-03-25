@@ -17,8 +17,8 @@ class Movie: NSObject, NSCoding {
     var title: String
     var synopsis: String
     var releaseDate: Date?
+    var posterData: UIImage?
     var posterEndpoint: String = "";
-    var posterPath: URL?;
     var posterName:String = "";
     var cast: String = "";
     var crew: String = "";
@@ -35,7 +35,8 @@ class Movie: NSObject, NSCoding {
     struct MovieKeys {
         static var DbId = "DbId"
         static var title = "title"
-        static var posterPath = "posterPath"
+        static var posterName = "posterName"
+        static var posterEndpoint = "posterEndpoint"
         static var synopsis = "synopsis"
         static var releaseDate = "releaseDate"
         static var cast = "cast"
@@ -47,7 +48,8 @@ class Movie: NSObject, NSCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(theMovieDbId, forKey: MovieKeys.DbId)
         aCoder.encode(title, forKey: MovieKeys.title)
-        aCoder.encode(posterPath, forKey: MovieKeys.posterPath)
+        aCoder.encode(posterName, forKey: MovieKeys.posterName)
+        aCoder.encode(posterEndpoint, forKey: MovieKeys.posterEndpoint)
         aCoder.encode(releaseDate, forKey: MovieKeys.releaseDate)
         aCoder.encode(synopsis, forKey: MovieKeys.synopsis)
         aCoder.encode(cast, forKey: MovieKeys.cast)
@@ -64,17 +66,23 @@ class Movie: NSObject, NSCoding {
         let savedDbId = aDecoder.decodeInteger(forKey: MovieKeys.DbId);
         let savedSynopsis = aDecoder.decodeObject(forKey: MovieKeys.synopsis) as? String ?? ""
         let savedDate = aDecoder.decodeObject(forKey: MovieKeys.releaseDate) as? Date
-        let savedPosterPath = aDecoder.decodeObject(forKey: MovieKeys.posterPath) as? URL
+        let savedPosterEndpoint = aDecoder.decodeObject(forKey: MovieKeys.posterEndpoint) as? String ?? ""
+        let savedPosterName = aDecoder.decodeObject(forKey: MovieKeys.posterName) as? String ?? ""
         let savedCast = aDecoder.decodeObject(forKey: MovieKeys.cast) as? String ?? ""
         let savedCrew = aDecoder.decodeObject(forKey: MovieKeys.crew) as? String ?? ""
         let savedMeta = aDecoder.decodeInteger(forKey: MovieKeys.metaRating);
         let savedRating = aDecoder.decodeInteger(forKey: MovieKeys.isaiahRating);
         
-        self.init(title:savedTitle, movieDbId: savedDbId, synopsis: savedSynopsis, releaseDate: savedDate, posterPath: savedPosterPath, cast: savedCast, crew: savedCrew, metaRating: savedMeta, isaiahRating: savedRating);
+        self.init(title:savedTitle, movieDbId: savedDbId, synopsis: savedSynopsis, releaseDate: savedDate, posterEndpoint: savedPosterEndpoint, cast: savedCast, crew: savedCrew, metaRating: savedMeta, isaiahRating: savedRating);
+        
+        if (savedPosterName != "") {
+            self.setPosterName(name: savedPosterName);
+        }
+        
         
     }
     
-    init?(title: String, movieDbId: Int, synopsis: String = "", releaseDate: Date? = nil, posterPath: URL? = nil, cast: String = "", crew: String = "", metaRating: Int = 0, isaiahRating: Int = 0) {
+    init?(title: String, movieDbId: Int, synopsis: String = "", releaseDate: Date? = nil, posterEndpoint: String = "", cast: String = "", crew: String = "", metaRating: Int = 0, isaiahRating: Int = 0) {
         guard !title.isEmpty else{
             return nil
         }
@@ -83,7 +91,7 @@ class Movie: NSObject, NSCoding {
         self.theMovieDbId = movieDbId;
         self.synopsis = synopsis;
         self.releaseDate = releaseDate;
-        self.posterPath = posterPath;
+        self.posterEndpoint = posterEndpoint;
         self.cast = cast;
         self.crew = crew;
         self.metaRating = metaRating;
@@ -110,7 +118,7 @@ class Movie: NSObject, NSCoding {
     }
     
     func hasImageFile() -> Bool {
-        if let path = self.posterPath {
+        if let path = self.getPosterPath() {
             return FileManager.default.fileExists(atPath: path.path);
         }
         return false;
@@ -134,20 +142,59 @@ class Movie: NSObject, NSCoding {
     
     func setPoster(path: String) {
         self.posterEndpoint = path;
-        let cleanPosterPath = path.replacingOccurrences(of: "/", with: "");
-        self.posterPath = self.getImagePath(path: cleanPosterPath);
     }
     
-    func downloadPoster(view: UIImageView? = nil) {
-        guard let posterPath = self.posterPath else {return}
+    func getPosterPath() -> URL? {
+        if !self.posterEndpoint.isEmpty {
+            let cleanPosterPath = self.posterEndpoint.replacingOccurrences(of: "/", with: "");
+            return self.getImagePath(path: cleanPosterPath);
+        }
+        return nil
+    }
+    
+    func getPosterAsync(imageView: UIImageView) {
+        if self.posterData != nil{
+            imageView.image = self.posterData;
+        } else {
+            self.retrievePoster(view: imageView);
+        }
+    }
+    
+    func getPoster() -> UIImage? {
+        if self.getPosterPath() != nil && self.hasImageFile(){
+            return UIImage(contentsOfFile: self.getPosterPath()!.path);
+        } else if self.posterName != ""{
+            if (UIImage(named: self.posterName) != nil) {
+                return UIImage(named: self.posterName);
+            }
+        }
+        return nil;
+    }
+    
+    func savePoster() {
+        if self.getPosterPath() != nil && self.posterData != nil {
+            if let data = UIImageJPEGRepresentation(self.posterData!, 1.0) {
+                print(self.getPosterPath())
+                do {
+                    try data.write(to: self.getPosterPath()!, options: .atomic)
+                } catch let fileError {
+                    print(fileError)
+                }
+            } else {
+                print("cant make jpeg rep");
+            }
+        }
+    }
+    
+    func retrievePoster(view: UIImageView? = nil) {
         // If file already exists, just set the poster path to the correct image path
         if self.hasImageFile() {
-            return;
+            if let view = view {
+                view.image = self.getPoster();
+            }
         }
         
-        print(posterPath);
-        
-        // If not, download it
+        // If not, fetch it from the internet
         if (self.posterEndpoint.isEmpty) { return }
         var endpoint = "https://image.tmdb.org/t/p/w500/";
         endpoint = endpoint + self.posterEndpoint;
@@ -174,11 +221,7 @@ class Movie: NSObject, NSCoding {
             }
             
             if let poster = UIImage(data: data) {
-                do {
-                    try data.write(to: posterPath, options: .atomic)
-                } catch let fileError {
-                    print(fileError)
-                }
+                self.posterData = poster;
                 if let imageView = view {
                     DispatchQueue.main.async() {
                         imageView.image = poster;
@@ -186,31 +229,6 @@ class Movie: NSObject, NSCoding {
                 }
             }
         }.resume();
-    }
-    
-    func getPosterAsync(imageView: UIImageView) {
-        if let path = self.posterPath {
-            if self.hasImageFile(){
-                imageView.image = UIImage(contentsOfFile: path.path);
-            } else {
-                self.downloadPoster(view: imageView);
-            }
-        } else if self.posterName != ""{
-            if (UIImage(named: self.posterName) != nil) {
-                imageView.image = UIImage(named: self.posterName);
-            }
-        }
-    }
-        
-    func getPoster() -> UIImage? {
-        if self.posterPath != nil && self.hasImageFile(){
-            return UIImage(contentsOfFile: posterPath!.path);
-        } else if self.posterName != ""{
-            if (UIImage(named: self.posterName) != nil) {
-                return UIImage(named: self.posterName);
-            }
-        }
-        return nil;
     }
 }
 

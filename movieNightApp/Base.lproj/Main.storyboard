@@ -192,7 +192,7 @@
                                 <connections>
                                     <outlet property="movieName" destination="n5g-DX-y8w" id="Iqx-kx-OdV"/>
                                     <outlet property="moviePoster" destination="ijw-ad-Od5" id="S5a-1o-cid"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="YAq-CA-yWH"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="EditDetail" id="YAq-CA-yWH"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -205,7 +205,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8F0-2R-TxO">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="n2b-U5-udW" kind="presentation" identifier="AddItem" id="2iO-WJ-rXj"/>
+                                <segue destination="EWT-7d-E8x" kind="show" identifier="SearchMovie" id="jC4-3r-6Xa"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -234,26 +234,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QoM-tN-zyh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2770" y="-815"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="7Ge-Yh-dEe">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="n2b-U5-udW" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="O2K-fI-lCN">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.91427111625671387" green="0.24791049957275391" blue="0.2528221607208252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="EWT-7d-E8x" kind="relationship" relationship="rootViewController" id="fVo-oO-Zpr"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Dvp-dz-PZb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3454" y="-101"/>
+            <point key="canvasLocation" x="2652" y="-815"/>
         </scene>
         <!--Add Movie View Controller-->
         <scene sceneID="JXV-Qj-xdk">
@@ -274,7 +255,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
                                     <action selector="searchTextChanged:" destination="EWT-7d-E8x" eventType="editingChanged" id="vlt-iJ-N9v"/>
                                 </connections>
@@ -321,7 +302,7 @@
                                         <connections>
                                             <outlet property="titleLabel" destination="KZq-nX-924" id="SaY-T3-5qK"/>
                                             <outlet property="yearLabel" destination="pHt-3X-JSF" id="rhN-Po-G0z"/>
-                                            <segue destination="Nuy-MT-v5k" kind="show" identifier="ShowMovieDetails" id="hCp-zQ-zLy"/>
+                                            <segue destination="Nuy-MT-v5k" kind="show" identifier="PreviewMovie" id="hCp-zQ-zLy"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -345,7 +326,7 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="N5b-AM-euv">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
-                                <action selector="cancellation:" destination="EWT-7d-E8x" id="Wwg-Cl-W5v"/>
+                                <segue destination="2Ww-Fi-86e" kind="unwind" unwindAction="unwindToMovieListWithSender:" id="LMn-Hf-Ir9"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -355,8 +336,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rEy-0e-0T0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="2Ww-Fi-86e" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4252.5" y="-101.40845070422536"/>
+            <point key="canvasLocation" x="3454" y="-107"/>
         </scene>
         <!--Preview View Controller-->
         <scene sceneID="5lU-j5-xrZ">
@@ -370,16 +352,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="KrB-63-FWM">
-                                <rect key="frame" x="8" y="269" width="359" height="132"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="132" id="cr4-7Y-0oK"/>
-                                </constraints>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </string>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Bbl-9f-sLr">
                                 <rect key="frame" x="32" y="431" width="310" height="58.5"/>
                                 <subviews>
@@ -400,15 +372,25 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Rating" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="11T-GB-F0o">
-                                        <rect key="frame" x="90" y="28.5" width="130" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="130" id="Yoo-U2-hYh"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="seJ-1P-i3o">
+                                        <rect key="frame" x="70" y="28.5" width="170" height="30"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Rating" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="11T-GB-F0o">
+                                                <rect key="frame" x="0.0" y="0.0" width="130" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="130" id="Yoo-U2-hYh"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fD8-ws-qvh">
+                                                <rect key="frame" x="140" y="0.0" width="30" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <state key="normal" title="Set"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="310" id="neR-h1-5Ro"/>
@@ -427,7 +409,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="e8y-jZ-Exf">
-                                <rect key="frame" x="32" y="508" width="310" height="29"/>
+                                <rect key="frame" x="32" y="508.5" width="310" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="310" id="HWy-qF-XMI"/>
                                 </constraints>
@@ -437,6 +419,16 @@
                                     <segment title="Amazing"/>
                                 </segments>
                             </segmentedControl>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="KrB-63-FWM">
+                                <rect key="frame" x="8" y="297" width="359" height="132"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="132" id="cr4-7Y-0oK"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo </string>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -457,16 +449,22 @@
                     </view>
                     <navigationItem key="navigationItem" id="nkV-wu-ZiR">
                         <barButtonItem key="backBarButtonItem" title="Cancel" id="Q0n-om-uGE"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="yzi-0l-j4c">
+                            <connections>
+                                <segue destination="E8n-41-gM1" kind="unwind" unwindAction="unwindToMovieListWithSender:" id="efl-47-7Cn"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="isaiahRating" destination="e8y-jZ-Exf" id="Jei-KM-xkX"/>
+                        <outlet property="posterView" destination="JYE-pb-qH5" id="chs-U3-0Ne"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ibl-i5-2fW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="E8n-41-gM1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5109.375" y="-101.40845070422536"/>
+            <point key="canvasLocation" x="4252" y="-107.49625187406298"/>
         </scene>
     </scenes>
     <resources>

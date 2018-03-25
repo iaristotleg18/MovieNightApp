@@ -11,22 +11,28 @@ import UIKit
 class PreviewViewController: UIViewController {
     
     @IBOutlet weak var posterView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var synopsisTextView: UITextView!
-    @IBOutlet weak var isaiahRating: UISegmentedControl!
+    //Add outlets here
     var movie: Movie? ;
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let m = movie {
-            titleLabel.text = m.title;
-            m.getPosterAsync(imageView: posterView);
-            synopsisTextView.text = m.synopsis
+        //Todo: #1 Display the properties of the movies
+        if let selectedMovie = movie {
+            selectedMovie.getPosterAsync(imageView: posterView);
+            //display the title
+            //display the synopsis
+            
         }
         
-
-        // Do any additional setup after loading the view.
+        if !FileManager.default.fileExists(atPath: Movie.ImageURL.path){
+            print("images directory does not exist")
+            do{
+                try FileManager.default.createDirectory(atPath: Movie.ImageURL.path, withIntermediateDirectories: true, attributes: nil)
+            } catch let error as NSError {
+                print("Error creating directory: \(error.localizedDescription)");
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,19 +40,12 @@ class PreviewViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    
     // MARK: - Navigation
-    
-//    @IBAction func cancellation(_ sender: UIBarButtonItem) {
-//        dismiss(animated: true, completion: nil);
-//    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let selectedMovie = movie {
+            selectedMovie.savePoster();
+        }
     }
     
-
+    //Todo: #2 Update Isaiah Rating
 }
