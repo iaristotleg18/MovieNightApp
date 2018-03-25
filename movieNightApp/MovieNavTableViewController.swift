@@ -130,7 +130,7 @@ class MovieNavTableViewController: UITableViewController {
         
         case "EditDetail":
             
-            guard let movieViewController = segue.destination as? MovieViewController else {
+            guard let movieViewController = segue.destination as? PreviewViewController else {
                 fatalError("Unexpected destination: \(segue.destination)")
             }
             

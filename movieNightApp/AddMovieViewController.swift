@@ -31,6 +31,7 @@ class AddMovieViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        searchTextField.becomeFirstResponder();
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,7 +48,6 @@ class AddMovieViewController: UIViewController, UITableViewDataSource, UITableVi
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "AutoCompleteTableViewCell", for: indexPath) as? AutoCompleteTableViewCell  else {
             fatalError("The dequeued cell is not an instance of AutoCompleteTableViewCell.")
         }
-        
         if (indexPath.row < allMoviesResults.count){
             let movie = allMoviesResults[indexPath.row]
             cell.titleLabel.text = movie.title;
@@ -55,7 +55,6 @@ class AddMovieViewController: UIViewController, UITableViewDataSource, UITableVi
             cell.delegate = self;
             cell.data = movie;
         }
-        
         return cell
     }
     
@@ -98,7 +97,6 @@ class AddMovieViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func selectedMovie(movie: Movie) {
-        
     }
     
     func clearAutocompleteResults(){

@@ -153,7 +153,13 @@ class Movie: NSObject, NSCoding {
     }
     
     func getPosterAsync(imageView: UIImageView) {
-        if self.posterData != nil{
+        if self.posterEndpoint.isEmpty && self.posterName.isEmpty {
+            imageView.image = UIImage(named: "NoImage");
+        } else if self.posterName != ""{
+            if (UIImage(named: self.posterName) != nil) {
+                imageView.image = UIImage(named: self.posterName);
+            }
+        } else if self.posterData != nil{
             imageView.image = self.posterData;
         } else {
             self.retrievePoster(view: imageView);
@@ -161,6 +167,9 @@ class Movie: NSObject, NSCoding {
     }
     
     func getPoster() -> UIImage? {
+        if self.posterEndpoint.isEmpty && self.posterName.isEmpty {
+            return UIImage(named: "NoImage");
+        }
         if self.getPosterPath() != nil && self.hasImageFile(){
             return UIImage(contentsOfFile: self.getPosterPath()!.path);
         } else if self.posterName != ""{
@@ -174,14 +183,13 @@ class Movie: NSObject, NSCoding {
     func savePoster() {
         if self.getPosterPath() != nil && self.posterData != nil {
             if let data = UIImageJPEGRepresentation(self.posterData!, 1.0) {
-                print(self.getPosterPath())
                 do {
                     try data.write(to: self.getPosterPath()!, options: .atomic)
                 } catch let fileError {
                     print(fileError)
                 }
             } else {
-                print("cant make jpeg rep");
+                print("cant make jpeg");
             }
         }
     }
