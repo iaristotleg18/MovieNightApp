@@ -12,17 +12,25 @@ class PreviewViewController: UIViewController {
     
     @IBOutlet weak var posterView: UIImageView!
     //Add outlets here
+    @IBOutlet weak var movieTitle: UILabel!
+    
+    
+    
     var movie: Movie? ;
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Todo: #1 Display the properties of the movies
         if let selectedMovie = movie {
-            selectedMovie.getPosterAsync(imageView: posterView);
-            //display the title
-            //display the synopsis
+            selectedMovie.getPosterAsync(imageView: posterView)
             
+            //title
+            movieTitle.text = movie?.title
+            //synopsis
+            posterView.image = movie?.getPoster()
         }
         
         if !FileManager.default.fileExists(atPath: Movie.ImageURL.path){
@@ -48,4 +56,33 @@ class PreviewViewController: UIViewController {
     }
     
     //Todo: #2 Update Isaiah Rating
+    
+    
+    
+    @IBAction func isaiahRatingSet(_ sender: UISegmentedControl) {
+        print(sender.selectedSegmentIndex)
+        
+        if let selectedMovie = movie {
+            
+            setIsaiahRating.sender.selectedSegmentValueIndex;
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

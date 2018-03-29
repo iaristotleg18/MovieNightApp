@@ -418,6 +418,9 @@
                                     <segment title="Mediocre"/>
                                     <segment title="Amazing"/>
                                 </segments>
+                                <connections>
+                                    <action selector="isaiahRatingSet:" destination="Nuy-MT-v5k" eventType="valueChanged" id="kMy-v8-8dk"/>
+                                </connections>
                             </segmentedControl>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="KrB-63-FWM">
                                 <rect key="frame" x="8" y="297" width="359" height="132"/>
@@ -458,6 +461,8 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="movieSyn" destination="KrB-63-FWM" id="LN6-nC-7xm"/>
+                        <outlet property="movieTitle" destination="4Rr-Oc-IyN" id="2sJ-Q8-j6h"/>
                         <outlet property="posterView" destination="JYE-pb-qH5" id="chs-U3-0Ne"/>
                     </connections>
                 </viewController>
