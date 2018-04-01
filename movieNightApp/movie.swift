@@ -132,7 +132,7 @@ class Movie: NSObject, NSCoding {
         self.metaRating = rating;
     }
     
-    func setIsiahRating(rating: Int) {
+    func setIsaiahRating(rating: Int) {
         self.isaiahRating = rating;
     }
     
@@ -174,7 +174,6 @@ class Movie: NSObject, NSCoding {
     func savePoster() {
         if self.getPosterPath() != nil && self.posterData != nil {
             if let data = UIImageJPEGRepresentation(self.posterData!, 1.0) {
-                print(self.getPosterPath())
                 do {
                     try data.write(to: self.getPosterPath()!, options: .atomic)
                 } catch let fileError {

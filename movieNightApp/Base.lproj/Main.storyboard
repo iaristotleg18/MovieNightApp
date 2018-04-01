@@ -461,7 +461,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="movieSyn" destination="KrB-63-FWM" id="LN6-nC-7xm"/>
+                        <outlet property="movieSynopsis" destination="KrB-63-FWM" id="VlW-8a-ZUC"/>
                         <outlet property="movieTitle" destination="4Rr-Oc-IyN" id="2sJ-Q8-j6h"/>
                         <outlet property="posterView" destination="JYE-pb-qH5" id="chs-U3-0Ne"/>
                     </connections>
