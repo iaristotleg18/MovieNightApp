@@ -132,7 +132,7 @@ class Movie: NSObject, NSCoding {
         self.metaRating = rating;
     }
     
-    func setIsiahRating(rating: Int) {
+    func setIsaiahRating(rating: Int) {
         self.isaiahRating = rating;
     }
     

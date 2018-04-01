@@ -12,7 +12,6 @@ protocol AutoCompleteResultsDelegate {
     func selectedMovie(movie: Movie)
 }
 
-
 class AutoCompleteTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
@@ -26,7 +25,6 @@ class AutoCompleteTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 

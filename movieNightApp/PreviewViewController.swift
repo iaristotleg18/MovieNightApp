@@ -9,7 +9,6 @@
 import UIKit
 
 class PreviewViewController: UIViewController {
-    
     @IBOutlet weak var posterView: UIImageView!
     //Add outlets here
     @IBOutlet weak var metaInput: UITextField!
@@ -18,16 +17,15 @@ class PreviewViewController: UIViewController {
     
     var toolbar:UIToolbar?;
     var movie: Movie? ;
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Todo: #1 Display the properties of the movies
         if let selectedMovie = movie {
-            selectedMovie.getPosterAsync(imageView: posterView);
-            //display the title
-            //display the synopsis
-            
+            selectedMovie.getPosterAsync(imageView: posterView)
+            movieTitle.text = selectedMovie.title
+            movieSynopsis.text = selectedMovie.synopsis
         }
         
         if !FileManager.default.fileExists(atPath: Movie.ImageURL.path){
