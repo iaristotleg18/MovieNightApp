@@ -133,22 +133,35 @@ class Movie: NSObject, NSCoding {
     }
     
     func setMetacriticRating(inputText: String) -> UILabel {
+        let label = self.getMetacriticLabel(inputText: inputText);
+        if label.text != "--" {
+            self.metaRating = label.text!;
+        }
+        return label;
+    }
+    
+    func getMetacriticRating() -> UILabel {
+        return self.getMetacriticLabel(inputText: self.metaRating);
+    }
+    
+    func getMetacriticLabel(inputText: String) -> UILabel {
         var label = UILabel()
         label.backgroundColor = .none
-
-        guard var value = Int(inputText) else {
-            print("Welcome to NIL-LAND");
+        
+        let trimmedString = inputText.trimmingCharacters(in: .whitespaces)
+        
+        guard var value = Int(trimmedString) else {
             label.text = "--";
             return label
         }
-
+        
         if value < 0 || value > 100 {
             label.text = "--";
             return label;
         }
         
         var labelText = "";
-
+        
         if value >= 0 && value < 25{
             label.backgroundColor = UIColor(red: (255.0/255), green: (116.0/255), blue: (107.0/255), alpha: 1.0) //red
             labelText = inputText
@@ -163,8 +176,6 @@ class Movie: NSObject, NSCoding {
             labelText = inputText
         }
         
-        //Padding
-        self.metaRating = String(value);
         labelText = " " + String(value) + " ";
         label.text = labelText;
         return label

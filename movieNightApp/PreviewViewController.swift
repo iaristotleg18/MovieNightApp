@@ -16,9 +16,8 @@ class PreviewViewController: UIViewController {
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var movieSynopsis: UITextView!
     @IBOutlet weak var movieYear: UILabel!
+    @IBOutlet weak var movieIsaiahRating: UISegmentedControl!
     
-    
-    //Add outlets
     @IBOutlet weak var metaInput: UITextField!
     @IBOutlet weak var metaRatingSetButton: UIButton!
     @IBOutlet weak var metaNumber: UILabel!
@@ -29,12 +28,23 @@ class PreviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Make sure the text view starts at the top && metaInput is formatted
+        movieSynopsis.contentInset = UIEdgeInsetsMake(-4,-4,0,0);
+        metaNumber.layer.masksToBounds = true
+        metaNumber.layer.cornerRadius = 5
+        
         //Todo: #1 Display the properties of the movies
         if let selectedMovie = movie {
             selectedMovie.getPosterAsync(imageView: posterView)
             movieTitle.text = selectedMovie.title
             movieSynopsis.text = selectedMovie.synopsis
             movieYear.text = "(" + selectedMovie.getYear() + ")";
+            movieIsaiahRating.selectedSegmentIndex = selectedMovie.isaiahRating;
+            if selectedMovie.metaRating != "" {
+                let label = selectedMovie.getMetacriticRating();
+                metaNumber.text = label.text;
+                metaNumber.backgroundColor = label.backgroundColor;
+            }
         }
         
         if !FileManager.default.fileExists(atPath: Movie.ImageURL.path){
@@ -130,8 +140,6 @@ class PreviewViewController: UIViewController {
             let newLabel = selectedMovie.setMetacriticRating(inputText: text)
             metaNumber.text = newLabel.text;
             metaNumber.backgroundColor = newLabel.backgroundColor;
-            metaNumber.layer.masksToBounds = true
-            metaNumber.layer.cornerRadius = 5
             metaInput.text = "";
             metaInput.sendActions(for: .editingChanged);
             metaInput.resignFirstResponder();

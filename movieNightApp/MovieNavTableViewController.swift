@@ -44,6 +44,9 @@ class MovieNavTableViewController: UITableViewController {
     }
     
     func saveMovies(){
+        for i in 0 ..< movies.count {
+            print(movies[i].isaiahRating);
+        }
         var saveSuccess = NSKeyedArchiver.archiveRootObject(movies, toFile: Movie.ArchiveURL.path)
     }
     
@@ -169,11 +172,6 @@ class MovieNavTableViewController: UITableViewController {
     
     //Movie Table View
     @IBAction func unwindToMovieList(sender: UIStoryboardSegue) {
-        
-        if let sourceViewController = sender.source as? MovieViewController, let movie = sourceViewController.movie {
-            updateMovieList(movie: movie);
-        }
-        
         if let sourceViewController = sender.source as? PreviewViewController, let movie = sourceViewController.movie {
             updateMovieList(movie: movie);
         }

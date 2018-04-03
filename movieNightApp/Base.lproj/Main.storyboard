@@ -158,7 +158,7 @@
             </objects>
             <point key="canvasLocation" x="4246" y="-1150"/>
         </scene>
-        <!--New Movies-->
+        <!--Movies-->
         <scene sceneID="fnC-A7-xIK">
             <objects>
                 <tableViewController id="q89-d8-Dg0" customClass="MovieNavTableViewController" customModule="movieNightApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -201,7 +201,7 @@
                             <outlet property="delegate" destination="q89-d8-Dg0" id="D9S-Ry-Y9a"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="New Movies" id="XCP-Sk-gBU">
+                    <navigationItem key="navigationItem" title="Movies" id="XCP-Sk-gBU">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8F0-2R-TxO">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -500,6 +500,7 @@
                         <outlet property="metaInput" destination="11T-GB-F0o" id="rWa-Me-cwv"/>
                         <outlet property="metaNumber" destination="8ZO-Ym-XAI" id="EWV-9M-xeT"/>
                         <outlet property="metaRatingSetButton" destination="fD8-ws-qvh" id="B3h-bJ-etS"/>
+                        <outlet property="movieIsaiahRating" destination="e8y-jZ-Exf" id="s6W-cm-tLD"/>
                         <outlet property="movieSynopsis" destination="KrB-63-FWM" id="XCi-4N-uO1"/>
                         <outlet property="movieTitle" destination="4Rr-Oc-IyN" id="fYS-2e-u3r"/>
                         <outlet property="movieYear" destination="W5L-AE-ha3" id="4nI-DZ-crn"/>
@@ -518,7 +519,7 @@
         <image name="editFresh" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hCp-zQ-zLy"/>
+        <segue reference="ZpV-r9-bzO"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.075903611139999994" green="0.39346531670000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
