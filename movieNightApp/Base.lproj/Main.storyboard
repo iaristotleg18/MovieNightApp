@@ -443,6 +443,7 @@
                                             <segment title="Mediocre"/>
                                             <segment title="Amazing"/>
                                         </segments>
+                                        <color key="tintColor" red="0.0" green="0.25" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <action selector="isaiahRatingSet:" destination="Nuy-MT-v5k" eventType="valueChanged" id="Rb6-Ea-yV5"/>
                                         </connections>
@@ -489,6 +490,7 @@
                     <navigationItem key="navigationItem" id="nkV-wu-ZiR">
                         <barButtonItem key="backBarButtonItem" title="Cancel" id="Q0n-om-uGE"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="yzi-0l-j4c">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <segue destination="E8n-41-gM1" kind="unwind" unwindAction="unwindToMovieListWithSender:" id="efl-47-7Cn"/>
                             </connections>
@@ -521,5 +523,5 @@
     <inferredMetricsTieBreakers>
         <segue reference="ZpV-r9-bzO"/>
     </inferredMetricsTieBreakers>
-    <color key="tintColor" red="0.075903611139999994" green="0.39346531670000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

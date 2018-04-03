@@ -32,6 +32,7 @@ class PreviewViewController: UIViewController {
         movieSynopsis.contentInset = UIEdgeInsetsMake(-4,-4,0,0);
         metaNumber.layer.masksToBounds = true
         metaNumber.layer.cornerRadius = 5
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
         
         //Todo: #1 Display the properties of the movies
         if let selectedMovie = movie {
