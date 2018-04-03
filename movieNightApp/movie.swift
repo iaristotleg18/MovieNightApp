@@ -22,7 +22,7 @@ class Movie: NSObject, NSCoding {
     var posterName:String = "";
     var cast: String = "";
     var crew: String = "";
-    var metaRating: Int = 0;
+    var metaRating: String = "";
 
     // User Specific
     var isaiahRating: Int = 0;
@@ -70,7 +70,7 @@ class Movie: NSObject, NSCoding {
         let savedPosterName = aDecoder.decodeObject(forKey: MovieKeys.posterName) as? String ?? ""
         let savedCast = aDecoder.decodeObject(forKey: MovieKeys.cast) as? String ?? ""
         let savedCrew = aDecoder.decodeObject(forKey: MovieKeys.crew) as? String ?? ""
-        let savedMeta = aDecoder.decodeInteger(forKey: MovieKeys.metaRating);
+        let savedMeta = aDecoder.decodeObject(forKey: MovieKeys.metaRating) as? String ?? ""
         let savedRating = aDecoder.decodeInteger(forKey: MovieKeys.isaiahRating);
         
         self.init(title:savedTitle, movieDbId: savedDbId, synopsis: savedSynopsis, releaseDate: savedDate, posterEndpoint: savedPosterEndpoint, cast: savedCast, crew: savedCrew, metaRating: savedMeta, isaiahRating: savedRating);
@@ -82,7 +82,7 @@ class Movie: NSObject, NSCoding {
         
     }
     
-    init?(title: String, movieDbId: Int, synopsis: String = "", releaseDate: Date? = nil, posterEndpoint: String = "", cast: String = "", crew: String = "", metaRating: Int = 0, isaiahRating: Int = 0) {
+    init?(title: String, movieDbId: Int, synopsis: String = "", releaseDate: Date? = nil, posterEndpoint: String = "", cast: String = "", crew: String = "", metaRating: String = "", isaiahRating: Int = 0) {
         guard !title.isEmpty else{
             return nil
         }
@@ -101,7 +101,7 @@ class Movie: NSObject, NSCoding {
     func getYear() -> String {
         let calendar = Calendar.current;
         if let date = self.releaseDate {
-            return String(calendar.component(.year, from: date))
+            return String(calendar.component(.year, from: date));
         } else {
             return "";
         }
@@ -128,12 +128,46 @@ class Movie: NSObject, NSCoding {
         return Movie.ImageURL.appendingPathComponent(path)
     }
     
-    func setMetaCriticRating(rating: Int) {
-        self.metaRating = rating;
-    }
-    
     func setIsaiahRating(rating: Int) {
         self.isaiahRating = rating;
+    }
+    
+    func setMetacriticRating(inputText: String) -> UILabel {
+        var label = UILabel()
+        label.backgroundColor = .none
+
+        guard var value = Int(inputText) else {
+            print("Welcome to NIL-LAND");
+            label.text = "--";
+            return label
+        }
+
+        if value < 0 || value > 100 {
+            label.text = "--";
+            return label;
+        }
+        
+        var labelText = "";
+
+        if value >= 0 && value < 25{
+            label.backgroundColor = UIColor(red: (255.0/255), green: (116.0/255), blue: (107.0/255), alpha: 1.0) //red
+            labelText = inputText
+        } else if value >= 25 && value < 50{
+            label.backgroundColor  = UIColor(red: (255.0/255), green: (191.0/255), blue: (112.0/255), alpha: 1.0) //orange
+            labelText = inputText
+        } else if value >= 50 && value < 75{
+            label.backgroundColor = UIColor(red: (255.0/255), green: (253.0/255), blue: (113.0/255), alpha: 1.0) //yellow
+            labelText = inputText
+        } else if value <= 100{
+            label.backgroundColor = UIColor(red: (117.0/255), green: (255.0/255), blue: (130.0/255), alpha: 1.0) //green
+            labelText = inputText
+        }
+        
+        //Padding
+        self.metaRating = String(value);
+        labelText = " " + String(value) + " ";
+        label.text = labelText;
+        return label
     }
     
     func setPosterName(name: String){

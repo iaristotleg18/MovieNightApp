@@ -9,11 +9,19 @@
 import UIKit
 
 class PreviewViewController: UIViewController {
-    @IBOutlet weak var posterView: UIImageView!
-    //Add outlets here
-    @IBOutlet weak var metaInput: UITextField!
+    // Scroll Container
     @IBOutlet weak var scrollContainer: UIScrollView!
+
+    @IBOutlet weak var posterView: UIImageView!
+    @IBOutlet weak var movieTitle: UILabel!
+    @IBOutlet weak var movieSynopsis: UITextView!
+    @IBOutlet weak var movieYear: UILabel!
+    
+    
+    //Add outlets
+    @IBOutlet weak var metaInput: UITextField!
     @IBOutlet weak var metaRatingSetButton: UIButton!
+    @IBOutlet weak var metaNumber: UILabel!
     
     var toolbar:UIToolbar?;
     var movie: Movie? ;
@@ -26,6 +34,7 @@ class PreviewViewController: UIViewController {
             selectedMovie.getPosterAsync(imageView: posterView)
             movieTitle.text = selectedMovie.title
             movieSynopsis.text = selectedMovie.synopsis
+            movieYear.text = "(" + selectedMovie.getYear() + ")";
         }
         
         if !FileManager.default.fileExists(atPath: Movie.ImageURL.path){
@@ -82,7 +91,7 @@ class PreviewViewController: UIViewController {
     }
     
     func toolBarButtonTapped(button:UIBarButtonItem) -> Void {
-        if button.title! == "set" {
+        if button.title?.lowercased() == "set" {
             self.updateMetacriticRating();
         } else {
             metaInput.text = "";
@@ -92,14 +101,18 @@ class PreviewViewController: UIViewController {
     }
     
     func checkMetacriticValid(value: String) {
-        if let myInt = Int(value) {
-            if myInt <= 100 && myInt >= 0 {
-                metaRatingSetButton.isEnabled = true;
-                self.toolbar?.items?.last?.isEnabled = true;
-            } else {
-                metaRatingSetButton.isEnabled = false;
-                self.toolbar?.items?.last?.isEnabled = false;
-            }
+        guard let myInt = Int(value) else {
+            metaRatingSetButton.isEnabled = false;
+            self.toolbar?.items?.last?.isEnabled = false;
+            return;
+        }
+        
+        if myInt <= 100 && myInt >= 0 {
+            metaRatingSetButton.isEnabled = true;
+            self.toolbar?.items?.last?.isEnabled = true;
+        } else {
+            metaRatingSetButton.isEnabled = false;
+            self.toolbar?.items?.last?.isEnabled = false;
         }
     }
     
@@ -113,8 +126,24 @@ class PreviewViewController: UIViewController {
     }
     
     func updateMetacriticRating() {
-        
+        if let selectedMovie = movie, let text = metaInput.text {
+            let newLabel = selectedMovie.setMetacriticRating(inputText: text)
+            metaNumber.text = newLabel.text;
+            metaNumber.backgroundColor = newLabel.backgroundColor;
+            metaNumber.layer.masksToBounds = true
+            metaNumber.layer.cornerRadius = 5
+            metaInput.text = "";
+            metaInput.sendActions(for: .editingChanged);
+            metaInput.resignFirstResponder();
+        }
+    }
+    @IBAction func setMetaRating(_ sender: UIButton) {
+        self.updateMetacriticRating();
     }
     
-    //Todo: #2 Update Isaiah Rating
+    @IBAction func isaiahRatingSet(_ sender: UISegmentedControl) {
+        if let selectedMovie = movie {
+            selectedMovie.setIsaiahRating(rating: sender.selectedSegmentIndex)
+        }
+    }
 }

@@ -388,10 +388,10 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Bbl-9f-sLr">
-                                        <rect key="frame" x="109" y="387" width="157.5" height="55.5"/>
+                                        <rect key="frame" x="110" y="387" width="156.5" height="55.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="JEG-wN-Soc">
-                                                <rect key="frame" x="0.0" y="0.0" width="157.5" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="156.5" height="20.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Metacritic Rating: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b0D-5z-zem">
                                                         <rect key="frame" x="0.0" y="0.0" width="139" height="20.5"/>
@@ -400,15 +400,15 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ZO-Ym-XAI">
-                                                        <rect key="frame" x="142" y="0.0" width="15.5" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <rect key="frame" x="142" y="0.0" width="14.5" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="seJ-1P-i3o">
-                                                <rect key="frame" x="8.5" y="25.5" width="140.5" height="30"/>
+                                                <rect key="frame" x="8" y="25.5" width="140.5" height="30"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Rating" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="11T-GB-F0o">
                                                         <rect key="frame" x="0.0" y="0.0" width="100.5" height="30"/>
@@ -416,7 +416,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                         <connections>
-                                                            <action selector="metaInputUpdated:" destination="Nuy-MT-v5k" eventType="editingChanged" id="lCF-bs-IaE"/>
+                                                            <action selector="metaInputUpdated:" destination="Nuy-MT-v5k" eventType="editingChanged" id="JR0-Hf-xAs"/>
                                                             <action selector="textFieldDidBeginEditing:" destination="Nuy-MT-v5k" eventType="editingDidBegin" id="u36-bU-twG"/>
                                                             <action selector="textFieldDidEndEditing:" destination="Nuy-MT-v5k" eventType="editingDidEnd" id="sPd-Rb-TG6"/>
                                                         </connections>
@@ -425,6 +425,9 @@
                                                         <rect key="frame" x="110.5" y="0.0" width="30" height="30"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <state key="normal" title="Set"/>
+                                                        <connections>
+                                                            <action selector="setMetaRating:" destination="Nuy-MT-v5k" eventType="touchUpInside" id="z1f-Nj-BAe"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -440,6 +443,9 @@
                                             <segment title="Mediocre"/>
                                             <segment title="Amazing"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="isaiahRatingSet:" destination="Nuy-MT-v5k" eventType="valueChanged" id="Rb6-Ea-yV5"/>
+                                        </connections>
                                     </segmentedControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCI-kq-MFc">
                                         <rect key="frame" x="143" y="457.5" width="89.5" height="20.5"/>
@@ -492,8 +498,12 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="metaInput" destination="11T-GB-F0o" id="rWa-Me-cwv"/>
-                        <outlet property="metaRatingSetButton" destination="fD8-ws-qvh" id="Cau-Gk-O8f"/>
-                        <outlet property="posterView" destination="JYE-pb-qH5" id="chs-U3-0Ne"/>
+                        <outlet property="metaNumber" destination="8ZO-Ym-XAI" id="EWV-9M-xeT"/>
+                        <outlet property="metaRatingSetButton" destination="fD8-ws-qvh" id="B3h-bJ-etS"/>
+                        <outlet property="movieSynopsis" destination="KrB-63-FWM" id="XCi-4N-uO1"/>
+                        <outlet property="movieTitle" destination="4Rr-Oc-IyN" id="fYS-2e-u3r"/>
+                        <outlet property="movieYear" destination="W5L-AE-ha3" id="4nI-DZ-crn"/>
+                        <outlet property="posterView" destination="JYE-pb-qH5" id="Yl3-yq-h53"/>
                         <outlet property="scrollContainer" destination="cnh-La-UMK" id="5Xi-MF-ega"/>
                     </connections>
                 </viewController>

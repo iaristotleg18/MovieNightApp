@@ -153,13 +153,13 @@ class MovieNavTableViewController: UITableViewController {
     func loadSampleMovies()  {
         
         // Force Awakens
-        let forceMovie: Movie = Movie(title: "The Force Awakens", movieDbId: 0, cast: "Daisy Ridley, John Boyega, Adam Driver, JJ Abrams", metaRating: 81, isaiahRating: 2)!
+        let forceMovie: Movie = Movie(title: "The Force Awakens", movieDbId: 0, cast: "Daisy Ridley, John Boyega, Adam Driver, JJ Abrams", metaRating: "81", isaiahRating: 2)!
         forceMovie.setPosterName(name: "TheForceAwakensPoster")
         
-        let tapMovie: Movie = Movie(title: "Spinal Tap", movieDbId: 0, cast: "Christopher Guest, Rob Reiner, Michael McKean, Harry Shearer", metaRating: 85, isaiahRating: 2)!
+        let tapMovie: Movie = Movie(title: "Spinal Tap", movieDbId: 0, cast: "Christopher Guest, Rob Reiner, Michael McKean, Harry Shearer", metaRating: "85", isaiahRating: 2)!
         tapMovie.setPosterName(name: "TheSpinalTapPoster");
         
-        let rogueMovie: Movie = Movie(title: "Rogue One: A Star Wars Story", movieDbId: 0, cast: "Felicity Jones, Diego Luna, Ben Mendelsohn, Gareth Edwards", metaRating: 65, isaiahRating: 2)!
+        let rogueMovie: Movie = Movie(title: "Rogue One: A Star Wars Story", movieDbId: 0, cast: "Felicity Jones, Diego Luna, Ben Mendelsohn, Gareth Edwards", metaRating: "65", isaiahRating: 2)!
         rogueMovie.setPosterName(name: "TheRogueOnePoster");
     
         movies.append(forceMovie)
