@@ -64,7 +64,7 @@ class PreviewViewController: UIViewController {
         
         if let selectedMovie = movie {
             
-            setIsaiahRating.sender.selectedSegmentValueIndex;
+            selectedSegmentValueIndex.sender.setIsaiahRating;
         }
     }
     
